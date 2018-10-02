@@ -1,111 +1,241 @@
-import React, {Component} from 'react'
-import {PropTypes} from 'prop-types'
-import {Row, Col} from 'antd'
+'use strict';
 
-class EventItemPopover extends Component {
-    constructor(props) {
-        super(props);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _row = require('antd/es/row');
+
+var _row2 = _interopRequireDefault(_row);
+
+var _col2 = require('antd/es/col');
+
+var _col3 = _interopRequireDefault(_col2);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _temp;
+
+require('antd/es/row/style/css');
+
+require('antd/es/col/style/css');
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EventItemPopover = (_temp = _class = function (_Component) {
+    _inherits(EventItemPopover, _Component);
+
+    function EventItemPopover(props) {
+        _classCallCheck(this, EventItemPopover);
+
+        return _possibleConstructorReturn(this, (EventItemPopover.__proto__ || Object.getPrototypeOf(EventItemPopover)).call(this, props));
     }
 
-    static propTypes = {
-        schedulerData: PropTypes.object.isRequired,
-        eventItem: PropTypes.object.isRequired,
-        title: PropTypes.string.isRequired,
-        startTime: PropTypes.string.isRequired,
-        endTime: PropTypes.string.isRequired,
-        statusColor: PropTypes.string.isRequired,
-        subtitleGetter: PropTypes.func,
-        viewEventClick: PropTypes.func,
-        viewEventText:PropTypes.string,
-        viewEvent2Click: PropTypes.func,
-        viewEvent2Text: PropTypes.string,
-    }
+    _createClass(EventItemPopover, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                schedulerData = _props.schedulerData,
+                eventItem = _props.eventItem,
+                title = _props.title,
+                startTime = _props.startTime,
+                endTime = _props.endTime,
+                statusColor = _props.statusColor,
+                subtitleGetter = _props.subtitleGetter,
+                viewEventClick = _props.viewEventClick,
+                viewEventText = _props.viewEventText,
+                viewEvent2Click = _props.viewEvent2Click,
+                viewEvent2Text = _props.viewEvent2Text;
+            var localeMoment = schedulerData.localeMoment,
+                config = schedulerData.config;
 
-    render(){
-        const {schedulerData, eventItem, title, startTime, endTime, statusColor,subtitleGetter, viewEventClick, viewEventText, viewEvent2Click, viewEvent2Text} = this.props;
-        const {localeMoment, config} = schedulerData;
-        let start = localeMoment(startTime), end = localeMoment(endTime);
+            var start = localeMoment(startTime),
+                end = localeMoment(endTime);
 
-        let subtitleRow = <div />;
-        if(subtitleGetter !== undefined){
-            let subtitle = subtitleGetter(schedulerData, eventItem);
-            if(subtitle != undefined){
-                subtitleRow = (
-                    <Row type="flex" align="middle">
-                        <Col span={2}>
-                            <div />
-                        </Col>
-                        <Col span={22} className="overflow-text">
-                            <span className="header2-text" title={subtitle}>{subtitle}</span>
-                        </Col>
-                    </Row>
+            var subtitleRow = _react2.default.createElement('div', null);
+            if (subtitleGetter !== undefined) {
+                var subtitle = subtitleGetter(schedulerData, eventItem);
+                if (subtitle != undefined) {
+                    subtitleRow = _react2.default.createElement(
+                        _row2.default,
+                        { type: 'flex', align: 'middle' },
+                        _react2.default.createElement(
+                            _col3.default,
+                            { span: 2 },
+                            _react2.default.createElement('div', null)
+                        ),
+                        _react2.default.createElement(
+                            _col3.default,
+                            { span: 22, className: 'overflow-text' },
+                            _react2.default.createElement(
+                                'span',
+                                { className: 'header2-text', title: subtitle },
+                                subtitle
+                            )
+                        )
+                    );
+                }
+            }
+
+            var opsRow = _react2.default.createElement('div', null);
+            if (viewEventText !== undefined && viewEventClick !== undefined && (eventItem.clickable1 == undefined || eventItem.clickable1)) {
+                var col = _react2.default.createElement(
+                    _col3.default,
+                    { span: 22 },
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'header2-text', style: { color: '#108EE9', cursor: 'pointer' }, onClick: function onClick() {
+                                viewEventClick(schedulerData, eventItem);
+                            } },
+                        viewEventText
+                    )
+                );
+                if (viewEvent2Text !== undefined && viewEvent2Click !== undefined && (eventItem.clickable2 == undefined || eventItem.clickable2)) {
+                    col = _react2.default.createElement(
+                        _col3.default,
+                        { span: 22 },
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'header2-text', style: { color: '#108EE9', cursor: 'pointer' }, onClick: function onClick() {
+                                    viewEventClick(schedulerData, eventItem);
+                                } },
+                            viewEventText
+                        ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'header2-text', style: { color: '#108EE9', cursor: 'pointer', marginLeft: '16px' }, onClick: function onClick() {
+                                    viewEvent2Click(schedulerData, eventItem);
+                                } },
+                            viewEvent2Text
+                        )
+                    );
+                };
+                opsRow = _react2.default.createElement(
+                    _row2.default,
+                    { type: 'flex', align: 'middle' },
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 2 },
+                        _react2.default.createElement('div', null)
+                    ),
+                    col
+                );
+            } else if (viewEvent2Text !== undefined && viewEvent2Click !== undefined && (eventItem.clickable2 == undefined || eventItem.clickable2)) {
+                var _col = _react2.default.createElement(
+                    _col3.default,
+                    { span: 22 },
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'header2-text', style: { color: '#108EE9', cursor: 'pointer' }, onClick: function onClick() {
+                                viewEvent2Click(schedulerData, eventItem);
+                            } },
+                        viewEvent2Text
+                    )
+                );
+                opsRow = _react2.default.createElement(
+                    _row2.default,
+                    { type: 'flex', align: 'middle' },
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 2 },
+                        _react2.default.createElement('div', null)
+                    ),
+                    _col
                 );
             }
-        }
 
-        let opsRow = <div />;
-        if(viewEventText !== undefined && viewEventClick !== undefined && (eventItem.clickable1 == undefined || eventItem.clickable1)){
-            let col = (
-                <Col span={22}>
-                    <span className="header2-text" style={{color: '#108EE9', cursor: 'pointer'}} onClick={() => {viewEventClick(schedulerData, eventItem);}}>{viewEventText}</span>
-                </Col>
-            );
-            if(viewEvent2Text !== undefined && viewEvent2Click !== undefined && (eventItem.clickable2 == undefined || eventItem.clickable2)) {
-                col = (
-                    <Col span={22}>
-                        <span className="header2-text" style={{color: '#108EE9', cursor: 'pointer'}} onClick={() => {viewEventClick(schedulerData, eventItem);}}>{viewEventText}</span><span className="header2-text" style={{color: '#108EE9', cursor: 'pointer', marginLeft: '16px'}} onClick={() => {viewEvent2Click(schedulerData, eventItem);}}>{viewEvent2Text}</span>
-                    </Col>
-                )
-            };
-            opsRow = (
-                <Row type="flex" align="middle">
-                    <Col span={2}>
-                        <div />
-                    </Col>
-                    {col}
-                </Row>
+            var dateFormat = config.eventItemPopoverDateFormat;
+            return _react2.default.createElement(
+                'div',
+                // { style: { width: '300px' } },
+                { style: { width: '200px' } },
+                _react2.default.createElement(
+                    _row2.default,
+                    { type: 'flex', align: 'middle' },
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 2 },
+                        _react2.default.createElement('div', { className: 'status-dot', style: { backgroundColor: statusColor } })
+                    ),
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 22, className: 'overflow-text' },
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'header2-text', title: title },
+                            title
+                        )
+                    )
+                ),
+                subtitleRow,
+                _react2.default.createElement(
+                    _row2.default,
+                    { type: 'flex', align: 'middle' },
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 2 },
+                        _react2.default.createElement('div', null)
+                    ),
+                    _react2.default.createElement(
+                        _col3.default,
+                        { span: 22 },
+                        // _react2.default.createElement(
+                        //     'span',
+                        //     { className: 'header1-text' },
+                        //     start.format('HH:mm')
+                        // ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'help-text'},
+                            // { className: 'help-text', style: { marginLeft: '8px' } },
+                            start.format(dateFormat)
+                        ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'header2-text', style: { marginLeft: '8px' } },
+                            '-'
+                        ),
+                        // _react2.default.createElement(
+                        //     'span',
+                        //     { className: 'header1-text', style: { marginLeft: '8px' } },
+                        //     end.format('HH:mm')
+                        // ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'help-text', style: { marginLeft: '8px' } },
+                            end.format(dateFormat)
+                        )
+                    )
+                ),
+                opsRow
             );
         }
-        else if(viewEvent2Text !== undefined && viewEvent2Click !== undefined && (eventItem.clickable2 == undefined || eventItem.clickable2)) {
-            let col = (
-                <Col span={22}>
-                    <span className="header2-text" style={{color: '#108EE9', cursor: 'pointer'}} onClick={() => {viewEvent2Click(schedulerData, eventItem);}}>{viewEvent2Text}</span>
-                </Col>
-            );
-            opsRow = (
-                <Row type="flex" align="middle">
-                    <Col span={2}>
-                        <div />
-                    </Col>
-                    {col}
-                </Row>
-            );
-        }
+    }]);
 
-        let dateFormat = config.eventItemPopoverDateFormat;
-        return (
-            <div style={{width: '300px'}}>
-                <Row type="flex" align="middle">
-                    <Col span={2}>
-                        <div className="status-dot" style={{backgroundColor: statusColor}} />
-                    </Col>
-                    <Col span={22} className="overflow-text">
-                        <span className="header2-text" title={title}>{title}</span>
-                    </Col>
-                </Row>
-                {subtitleRow}
-                <Row type="flex" align="middle">
-                    <Col span={2}>
-                        <div />
-                    </Col>
-                    <Col span={22}>
-                        <span className="header1-text">{start.format('HH:mm')}</span><span className="help-text" style={{marginLeft: '8px'}}>{start.format(dateFormat)}</span><span className="header2-text"  style={{marginLeft: '8px'}}>-</span><span className="header1-text" style={{marginLeft: '8px'}}>{end.format('HH:mm')}</span><span className="help-text" style={{marginLeft: '8px'}}>{end.format(dateFormat)}</span>
-                    </Col>
-                </Row>
-                {opsRow}
-            </div>
-        );
-    }
-}
-
-export default EventItemPopover
+    return EventItemPopover;
+}(_react.Component), _class.propTypes = {
+    schedulerData: _propTypes.PropTypes.object.isRequired,
+    eventItem: _propTypes.PropTypes.object.isRequired,
+    title: _propTypes.PropTypes.string.isRequired,
+    startTime: _propTypes.PropTypes.string.isRequired,
+    endTime: _propTypes.PropTypes.string.isRequired,
+    statusColor: _propTypes.PropTypes.string.isRequired,
+    subtitleGetter: _propTypes.PropTypes.func,
+    viewEventClick: _propTypes.PropTypes.func,
+    viewEventText: _propTypes.PropTypes.string,
+    viewEvent2Click: _propTypes.PropTypes.func,
+    viewEvent2Text: _propTypes.PropTypes.string
+}, _temp);
+exports.default = EventItemPopover;
